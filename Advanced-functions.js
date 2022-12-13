@@ -206,7 +206,7 @@ function slower(func, seconds) {
 
 let slowedSomeFunction = slower(someFunction, 5); // обгортаєте свою довільну функцію 'someFunction' в декоратор*
 
-// slowedSomeFunction() // викликаєте декоратор*
+// slowedSomeFunction() // викликаєте декоратор* 
 
 // виведе в консоль "Chill out, you will get you result in 5 seconds"
 //...через 5 секунд виведе результат роботи 'someFunction*'
