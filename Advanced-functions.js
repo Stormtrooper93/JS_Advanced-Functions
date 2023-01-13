@@ -61,10 +61,10 @@
 // ];
 
 // console.log(movies.sort(byProperty('releaseYear', '>'))); // виведе масив фільмів посортованих по року випуску, від старішого до новішого*
-// console.log(movies.sort(byProperty('runningTimeInMinutes', '<'))); // виведе масив фільмів посортованих по їх тривалості, від найдовшого до найкоротшого*
-// console.log(movies.sort(byProperty('movieName', '>'))); // виведе масив фільмів посортованих по назві, в алфавітному порядку*
+// // console.log(movies.sort(byProperty('runningTimeInMinutes', '<'))); // виведе масив фільмів посортованих по їх тривалості, від найдовшого до найкоротшого*
+// // console.log(movies.sort(byProperty('movieName', '>'))); // виведе масив фільмів посортованих по назві, в алфавітному порядку*
 
-//функція запускається через консольлог і приймає 2 аргументи - параметр і напрямок сортування
+// // функція запускається через консольлог і приймає 2 аргументи - параметр і напрямок сортування
 // function byProperty(property, direction) {
 //     // ставимо умову для direction, щоб визначити напрямок сортування
 //     if (direction === ">") {
@@ -72,9 +72,8 @@
 //         //яка поверне значення true -> 1 або false -> -1 завдняки тернарному оператору
 //         return (a, b) => a[property] > b[property] ? 1 :- 1;
 //         //якщо напрямок зростання, то виконується аналогічна стрілочна функція, лише з іншим знаком порівняння
-//     } else {
+//     }
 //         return (a, b) => a[property] < b[property] ? 1 :- 1;
-//     };
 // };
     
 
@@ -193,24 +192,27 @@ console.log (""); // Пустий рядок
 
 console.log ("7. Напишіть функцію-декоратор яка вповільнює виконання довільної функції на вказану кількість секунд.");
 
-//функція, яка приймає аргумент (число), додає до нього +1 і виводить це в консоль
+// функція, яка приймає аргумент (число), додає до нього +1 і виводить це в консоль
 function someFunction(a) {
-    console.log(a + 1); 
+    let result = a + 1; 
+    console.log('result: a + 1 =', result);
 };
 
 //функція - декоратор, яка приймає в аргументи функцію, яку обгортає і число для таймаута
 function slower(func, seconds) {
     console.log("Chill out, you will get you result in 5 seconds");
-    return setTimeout(func, seconds * 1000);
+    return function () {
+        setTimeout(func.bind(null, ...arguments), seconds * 1000);
+    };
 };
 
 //Присвоюємо значення для декоратора задаючи йому параментри для обгортання - наша функція і час для таймаута
-let slowedSomeFunction = slower(someFunction, 5);
+let slowedSomeFunction = slower(someFunction, 1);
 
 //викликаємо декоратор
 slowedSomeFunction(10);
 // console.log(typeof slowedSomeFunction);
 
-
 // виведе в консоль "Chill out, you will get you result in 5 seconds"
-// ...через 5 секунд виведе результат роботи 'someFunction*'
+// ...через 5 секунд виведе результат роботи someFunction
+  
