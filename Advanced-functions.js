@@ -186,11 +186,8 @@
 
 
 
-
-
 console.log (""); // Пустий рядок 
-
-console.log ("7. Напишіть функцію-декоратор яка вповільнює виконання довільної функції на вказану кількість секунд.");
+console.log ("7. Напишіть функцію-декоратор, яка вповільнює виконання довільної функції на вказану кількість секунд.");
 
 // функція, яка приймає аргумент (число), додає до нього +1 і виводить це в консоль
 function someFunction(a) {
@@ -199,19 +196,20 @@ function someFunction(a) {
 };
 
 //функція - декоратор, яка приймає в аргументи функцію, яку обгортає і число для таймаута
-function slower(func, seconds) {
-    console.log("Chill out, you will get you result in 5 seconds");
+function slower(func, seconds) { 
+    console.log(`Chill out, you will get you result in ${seconds} seconds`);
+    
     return function () {
         setTimeout(func.bind(null, ...arguments), seconds * 1000);
+        // setTimeout(() => func.apply(this, arguments), seconds*1000); - інший варіант для функції
     };
 };
 
 //Присвоюємо значення для декоратора задаючи йому параментри для обгортання - наша функція і час для таймаута
-let slowedSomeFunction = slower(someFunction, 1);
+let slowedSomeFunction = slower(someFunction, 5);
 
 //викликаємо декоратор
 slowedSomeFunction(10);
-// console.log(typeof slowedSomeFunction);
 
 // виведе в консоль "Chill out, you will get you result in 5 seconds"
 // ...через 5 секунд виведе результат роботи someFunction
